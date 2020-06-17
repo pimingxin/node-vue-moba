@@ -1,0 +1,197 @@
+@import 'variables';
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+html {
+  font-size: 13px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2em;
+  background: #f1f1f1;
+  -webkit-font-smoothing: antialiased
+}
+
+a {
+  color: #999;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+@each $colorKey,$colorValue in $colors {
+  .text-#{$colorKey} {
+    color: $colorValue
+  }
+  .bg-#{$colorKey} {
+    background-color: $colorValue;
+  }
+}
+
+// text-align
+@each $var in (left,center,right) {
+  .text-#{$var} {
+    text-align: $var !important;
+  }
+}
+
+// font size
+
+
+@each $sizeKey, $size in $font-sizes {
+  .fs-#{$sizeKey} {
+    font-size: $size * $base-font-size;
+  }
+}
+
+// width , height
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+// flex
+
+.d-flex {
+  display: flex;
+};
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+
+
+@each $key,$value in $flex-jc {
+  .jc-#{$key} {
+    justify-content: $value;
+  }
+};
+
+
+
+@each $key,$value in $flex-ai {
+  .ai-#{$key} {
+    align-items: $value;
+  }
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+};
+
+
+
+// mt-0 {
+//   m-t:0
+// }
+
+@each $key,$value in $spacing-types {
+
+  // .m-1
+  @each $skey,$svalue in $spacing-sizes {
+    .#{$key}-#{$skey} {
+      #{$value}: $svalue * $spcing-base-size
+    }
+  }
+  // mx-1 my-1
+  @each $skey,$svalue in $spacing-sizes {
+    .#{$key}x-#{$skey} {
+      #{$value}-left: $svalue * $spcing-base-size;
+      #{$value}-right: $svalue * $spcing-base-size;
+    }
+
+    .#{$key}y-#{$skey} {
+      #{$value}-top: $svalue * $spcing-base-size;
+      #{$value}-bottom: $svalue * $spcing-base-size;
+    }
+  }
+
+  // .mt-0
+  @each $dkey,$dvalue in $spacing-directions {
+    @each $skey,$svalue in $spacing-sizes {
+      .#{$key}#{$dkey}-#{$skey} {
+        #{$value}-#{$dvalue}: $svalue * $spcing-base-size
+      }
+    }
+  }
+}
+
+// button
+
+.btn {
+  border: none;
+  border-radius: 0.1538rem;
+  font-size: map-get($font-sizes, 'sm') * $base-font-size;
+  padding: 0.2rem 0.6rem;
+}
+
+.nav{
+  display: flex;
+  .nav-item {
+    border-bottom: 3px solid transparent;
+    padding-bottom: .2rem;
+    &.active {
+      color: map-get($colors, 'primary');
+      border-bottom-color: map-get($colors, 'primary');
+    }
+  }
+  &.nav-inverse {
+    .nav-item{
+      color: map-get($colors, 'white');
+      &.active {
+        border-bottom-color: map-get($colors, 'white');
+      }
+    }
+  }
+}
+
+// sprite
+.sprite {
+  background: url(../image/index.png) no-repeat 0 0;
+  // 移动端 宽度375px 转rem
+  background-size: 28.8462rem;
+  display: inline-block; // 需要能设置宽高 i标签是文本标签 没有宽高
+  &.sprite-news {
+    width: 1.7692rem;
+    height: 1.5385rem;
+    background-position: 63.546% 15.517%;
+  }
+
+  &.sprite-arrow{
+    width: 0.7692rem;
+    height: 0.7692rem;
+    background-position: 38.577% 52.076%;
+  }
+}
+
+// text-overflow
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// border
+@each $dir in (top,right,bottom,left) {
+  .border-#{$dir} {
+    border-#{$dir}: 1px solid $border-color
+  }
+}
